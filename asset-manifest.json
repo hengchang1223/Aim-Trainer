@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Aim-Trainer/static/css/main.44153557.chunk.css",
+    "main.js": "/Aim-Trainer/static/js/main.30c1b429.chunk.js",
+    "main.js.map": "/Aim-Trainer/static/js/main.30c1b429.chunk.js.map",
+    "runtime-main.js": "/Aim-Trainer/static/js/runtime-main.5f7022f5.js",
+    "runtime-main.js.map": "/Aim-Trainer/static/js/runtime-main.5f7022f5.js.map",
+    "static/js/2.a9a1f524.chunk.js": "/Aim-Trainer/static/js/2.a9a1f524.chunk.js",
+    "static/js/2.a9a1f524.chunk.js.map": "/Aim-Trainer/static/js/2.a9a1f524.chunk.js.map",
+    "index.html": "/Aim-Trainer/index.html",
+    "precache-manifest.19134d21a1bd039765d12b157664485a.js": "/Aim-Trainer/precache-manifest.19134d21a1bd039765d12b157664485a.js",
+    "service-worker.js": "/Aim-Trainer/service-worker.js",
+    "static/css/main.44153557.chunk.css.map": "/Aim-Trainer/static/css/main.44153557.chunk.css.map",
+    "static/js/2.a9a1f524.chunk.js.LICENSE.txt": "/Aim-Trainer/static/js/2.a9a1f524.chunk.js.LICENSE.txt",
+    "static/media/red_dot.png": "/Aim-Trainer/static/media/red_dot.0773aac1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5f7022f5.js",
+    "static/js/2.a9a1f524.chunk.js",
+    "static/css/main.44153557.chunk.css",
+    "static/js/main.30c1b429.chunk.js"
+  ]
+}
