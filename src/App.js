@@ -1,30 +1,33 @@
-import React, { Component} from 'react';
+import React from 'react';
 
-// import Ready from './components/Ready/Ready';
+import Ready from './components/Ready/Ready';
 import Track from './components/Track/Track';
-// import RedDot from './components/Track/RedDot';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Aim from './components/Aim/Aim'
+// import RedDot from './components/RedDot/RedDot';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // import RedDot from './components/Track/RedDot';
 
-// const App = () => (
-//     <Router>
-//         <Route path="/" exact component={Ready} />
-//         <Route path="/Track" component={Track} />
-//     </Router>
+const App = () => (
+    <Router>
+        <Route path="/" exact component={Ready} />
+        <Route path="/Track" component={Track} />
+        <Route path="/Aim" component={Aim} />
+    </Router>
     
-// );
+);
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                {/* <canvas id="track" width="600" height="400"></canvas> */}
-                <Track hover={false} />
-            </div>
-        )
-    }
-}
+// class App extends Component {
+//     render() {
+//         return (
+//             <div >
+//                 {/* <Track /> */}
+//                 <Aim />
+//                 {/* <RedDot /> */}
+//             </div>
+//         )
+//     }
+// }
 
 export default App;
 

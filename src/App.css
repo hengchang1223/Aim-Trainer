@@ -1,0 +1,58 @@
+h1{
+    justify-content: center;
+    text-align: center;
+    color: white;
+    display: flex;
+    font-size: 48px;
+    margin-top: 200px;
+}
+
+.gameSetting{
+    background-color: #202b33;
+    border: solid 1px transparent;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 24px;
+    margin: auto;
+    margin-top: 30px;
+    width: 240px;
+    height: 80px;
+    cursor: pointer;
+    display: block;
+
+}
+
+.gameSetting:hover{
+    background-color: aqua;
+}
+
+.outerContainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    background-color: #696969;   
+}
+
+.container{
+    border: 2px solid white;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    background-color: black;
+    width: 1600px;
+    height: 900px;
+}
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

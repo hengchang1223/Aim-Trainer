@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
-import RedDot from './red_dot.png';
+import RedDot from '../RedDot/RedDot';
 
-import './Track.css'
-
-var T = require('./Transform');
+import '../../App.css';
 
 class Track extends Component {
-    constructor(props) {
-        super();
-        this.state = {
-            hover: props.hover,
-            timerOn: false,
-            timerSart: 0,
-            timerTime: 0,
-            trackStart: false,
-            posX: 800,
-            posY: 450,
-            velocity: 5,
-            direction: Math.PI / 2
-        }
-        
-    };
+    state = {
+        timerOn: false,
+        timerStart: 0,
+        timerTime: 0,
+        trackStart: false,
+        posX: 800,
+        posY: 450,
+        velocity: 5,
+        direction: Math.PI / 2
+    }
 
     hoverOnHandler = () => {
         this.setState({
-            hover: true,
             timerOn: true,
             timerTime: this.state.timerTime,
             timerStart: Date.now() - this.state.timerTime
@@ -40,7 +32,6 @@ class Track extends Component {
 
     hoverOutHandler = () => {
         this.setState({
-            hover: false,
             timerOn: false
         });
         clearInterval(this.timer);
@@ -103,11 +94,6 @@ class Track extends Component {
         let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
         let left = this.state.posX + 'px';
         let top = this.state.posY + 'px';
-        // var style = {
-        //     transform: T.translate(
-                
-        //     )
-        // }
 
         return (
             <div className="outerContainer">
@@ -122,24 +108,14 @@ class Track extends Component {
                     {hours} : {minutes} : {seconds} : {centiseconds}
                 </div>
 
-                {/* <div 
-                onMouseEnter={this.hoverOnHandler}
-                onMouseLeave={this.hoverOutHandler}
-                style={{padding: '0px', left, top, position: 'absolute'}}
-                > */}
-                {/* <div>
-                    <canvas width='400' height='400'></canvas>
-                </div> */}
                 <div className="container">
-                    <img 
-                    src={RedDot} 
-                    alt='RedDot' 
-                    width='20'
-                    height='20'
-                    onMouseEnter={this.hoverOnHandler}
-                    onMouseLeave={this.hoverOutHandler}
+                    <div
+                    onMouseEnter={this.state.trackStart && this.hoverOnHandler}
+                    onMouseLeave={this.state.trackStart && this.hoverOutHandler}
                     style={{padding: '0px', left, top, position: 'absolute'}}
-                    />
+                    >
+                        <RedDot />
+                    </div>
                 </div>
             </div>
         )
