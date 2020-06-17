@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import RedDot from './red_dot.png';
 
+import './Track.css'
+
+var T = require('./Transform');
+
 class Track extends Component {
     constructor(props) {
         super();
@@ -10,8 +14,10 @@ class Track extends Component {
             timerSart: 0,
             timerTime: 0,
             trackStart: false,
-            posX: 100,
-            posY: 100
+            posX: 800,
+            posY: 450,
+            velocity: 5,
+            direction: Math.PI / 2
         }
         
     };
@@ -53,22 +59,39 @@ class Track extends Component {
         });
         
         this.moving = setInterval(() =>{
-            var x = Math.floor((Math.random() * 100)+1);
-            var y = Math.floor((Math.random() * 100)+1);
+            var x = this.state.posX + this.state.velocity * Math.sin(this.state.direction);
+            var y = this.state.posY + this.state.velocity * Math.cos(this.state.direction);
+            if ( x < 10 || x > 1590 ) {
+                this.setState({
+                    direction: Math.PI * 2 - this.state.direction
+                });
+            } else if ( y < 10 || y > 890 ) {
+                this.setState({
+                    direction: Math.PI - this.state.direction
+                });
+            } else {
+                this.setState({
+                    posX: x,
+                    posY: y
+                });
+            };
+        }, 20);
+
+        this.changeDirection = setInterval(() =>{
             this.setState({
-                posX: x,
-                posY: y
+                direction: Math.random() * Math.PI * 2
             });
-        }, 100);
+        }, 2000);
     };
 
     stopTracking = () => {
         this.setState({
             trackStart: false,
-            posX: 100,
-            posY: 100
+            posX: 800,
+            posY: 450
         });
         clearInterval(this.moving);
+        clearInterval(this.changeDirection);
     };
     
     render() {
@@ -80,18 +103,34 @@ class Track extends Component {
         let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
         let left = this.state.posX + 'px';
         let top = this.state.posY + 'px';
+        // var style = {
+        //     transform: T.translate(
+                
+        //     )
+        // }
 
         return (
-            <div>
+            <div className="outerContainer">
                 <div>
                     <button onClick={this.startTracking}>Start</button>
                     <button onClick={this.stopTracking}>Stop</button>
+                    {this.state.timerOn === false && this.state.timerTime > 0 && (
+                    <button onClick={this.resetTimer}>Reset</button>
+                )}
                 </div>
                 <div>
                     {hours} : {minutes} : {seconds} : {centiseconds}
                 </div>
 
-                <div>
+                {/* <div 
+                onMouseEnter={this.hoverOnHandler}
+                onMouseLeave={this.hoverOutHandler}
+                style={{padding: '0px', left, top, position: 'absolute'}}
+                > */}
+                {/* <div>
+                    <canvas width='400' height='400'></canvas>
+                </div> */}
+                <div className="container">
                     <img 
                     src={RedDot} 
                     alt='RedDot' 
@@ -102,10 +141,6 @@ class Track extends Component {
                     style={{padding: '0px', left, top, position: 'absolute'}}
                     />
                 </div>
-
-                {this.state.timerOn === false && this.state.timerTime > 0 && (
-                    <button onClick={this.resetTimer}>Reset</button>
-                )}
             </div>
         )
     }

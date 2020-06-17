@@ -19,6 +19,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                {/* <canvas id="track" width="600" height="400"></canvas> */}
                 <Track hover={false} />
             </div>
         )
