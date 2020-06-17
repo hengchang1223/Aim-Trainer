@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68a53e753eb1017efaef2f6b40d9d82c",
+    "revision": "76f6fb2b74f6005fe0e4e94c3fe944cc",
     "url": "/Aim-Trainer/index.html"
   },
   {
