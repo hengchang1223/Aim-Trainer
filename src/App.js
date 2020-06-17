@@ -1,21 +1,58 @@
 import React from 'react';
 
-import Ready from './components/Ready/Ready';
 import Track from './components/Track/Track';
 import Aim from './components/Aim/Aim'
-// import RedDot from './components/RedDot/RedDot';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter, Route, Link } from 'react-router-dom';
 
+import './App.css';
+
+// const Ready = () => {
+//     return (
+//         <div className="outerContainer">
+//             <div className="container">
+//                 <h1>Aim Trainer</h1>
+//                 <Link to={'/Track'}>
+//                     <button className="gameSetting">Track Training</button>
+//                 </Link>
+                
+//                 <Link to={'/Aim'}>
+//                     <button className="gameSetting">Aim Training</button>
+//                 </Link>
+//             </div>
+//         </div>
+//     );
+// };
 // import RedDot from './components/Track/RedDot';
 
-const App = () => (
-    <Router>
-        <Route path="/" exact component={Ready} />
-        <Route path="/Track" component={Track} />
-        <Route path="/Aim" component={Aim} />
-    </Router>
+const App = () => {
+    return (
+        <HashRouter basename='/'>
+            <div>
+                <div className="outerContainer">
+                    <div className="container">
+                        <h1>Aim Trainer</h1>
+                            <Link className="gameSetting" to='/Track'>
+                                <h2>Track Training</h2>
+                            </Link>
+                
+                            <Link className="gameSetting" to='/Aim'>
+                                <h2>Aim Training</h2>
+                            </Link>
+                    </div>
+                </div>
+                <Route path="/Track" component={Track} />
+                <Route path="/Aim" component={Aim} />
+            </div>
+        </HashRouter>
+    )
+    // <Router>
+    //     <Route path="/" exact component={Ready} />
+    //     <Route path="/Track" component={Track} />
+    //     <Route path="/Aim" component={Aim} />
+    // </Router>
     
-);
+};
 
 // class App extends Component {
 //     render() {

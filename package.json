@@ -1,8 +1,8 @@
 {
-  "homepage": "https://hengchang1223.github.io/Aim-Trainer/",
-  "name": "my-app",
+  "name": "aim-trainer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hengchang1223.github.io/Aim-Trainer",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -11,7 +11,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1"
+    "gh-pages": "^3.0.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -35,8 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.0.0"
   }
 }
