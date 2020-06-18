@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "684a700a8a3615e4312fef632dd490bb",
+    "revision": "d10188fe38386a93f68c048c3137b38b",
     "url": "/Aim-Trainer/index.html"
   },
   {
-    "revision": "980457d5695cde388467",
+    "revision": "6b31a382ddcc7663184e",
     "url": "/Aim-Trainer/static/css/main.3fff31d3.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Aim-Trainer/static/js/2.cbd0c645.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "980457d5695cde388467",
-    "url": "/Aim-Trainer/static/js/main.66ee0f9f.chunk.js"
+    "revision": "6b31a382ddcc7663184e",
+    "url": "/Aim-Trainer/static/js/main.a5a64842.chunk.js"
   },
   {
     "revision": "f12db93fa359d1056467",
