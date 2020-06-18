@@ -134,26 +134,31 @@ import '../../App.css';
 
 const Track = () => {
     var helpText = "After hitting Play button, you have 30 \n\nseconds to track the target. Try to keep\n\n track of the target as long as possible.\n\n Good Luck!"
+    var sourceName = "/Track/"
 
     return (
-        <HashRouter basename="/Track/">
+        <HashRouter basename="/">
             <div>
                 <div className="outerContainer">
                     <div className="container">
                             <h1>Track Training</h1>
-                            <Link className="gameSetting" to='/PlayTrack/'>
+                            <Link className="gameSetting" to='/Track/PlayTrack/'>
                                 <h2>Play</h2>
                             </Link>
                     
-                            <Link className="gameSetting" to='/Help/'>
+                            <Link className="gameSetting" to='/Track/Help/'>
                                 <h2>Help</h2>
                             </Link>
+
+                            <Link className="gameSetting" to='/'>
+                                <h2>Return</h2>
+                            </Link>
                     </div>
-                    <Route path="/PlayTrack" component={PlayTrack} />
+                    <Route path="/Track/PlayTrack" component={PlayTrack} />
                     <Route 
-                    path="/Help" 
+                    path="/Track/Help" 
                     render={(props) => (
-                        <Help {...props} text={helpText}/>
+                        <Help {...props} text={helpText} sourceName={sourceName} />
                     )}
                     />
                 </div>

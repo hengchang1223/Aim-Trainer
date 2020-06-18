@@ -1,48 +1,62 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import RedDot from '../RedDot/RedDot';
+// import Track from './Track';
 
 import '../../App.css';
 
 class PlayTrack extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             // timerOn: false,
             timerStart: 30000,
             timerTime: 30000,
-            // trackOn: false,
+            trackOn: false,
             trackStart: 0,
             trackTime: 0,
             // trackStart: false,
             posX: 800,
             posY: 450,
             velocity: 5,
-            direction: Math.PI / 2
+            direction: Math.PI / 2,
+            keyPressed: false
         }
+        
+        // console.log(props);
+    };
+
+    componentDidMount() {
         this.startTracking();
         this.startTimer();
-    }
+        document.addEventListener('keydown', this.handleKeyPressed);
+    };
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyPressed);
+    };
 
     startTimer = () => {
         this.setState({
         //   timerOn: true,
-          timerTime: this.state.timerTime,
-          timerStart: this.state.timerTime
+            // trackOn: true,
+            timerTime: this.state.timerTime,
+            timerStart: this.state.timerTime
         });
 
         this.timer = setInterval(() => {
-          const newTime = this.state.timerTime - 10;
-          if (newTime >= 0) {
-            this.setState({
-              timerTime: newTime
-            });
-          } else {
-            clearInterval(this.timer);
-            this.stopTracking();
-            // this.setState({ timerOn: false });
-            // let message = 'Success: ' + this.state.success.toString();
-            alert('Time On Track: ' + this.state.trackTime);
-          }
+            const newTime = this.state.timerTime - 10;
+            if (newTime >= 0) {
+                this.setState({
+                    timerTime: newTime
+                });
+            } else {
+                clearInterval(this.timer);
+                this.stopTracking();
+                // this.setState({ trackOn: false });
+                // let message = 'Success: ' + this.state.success.toString();
+                alert('Time On Track: ' + this.state.trackTime);
+            }
         }, 10);
       };
 
@@ -79,9 +93,9 @@ class PlayTrack extends Component {
     // };
 
     startTracking = () => {
-        // this.setState({
-        //     trackOn: true
-        // });
+        this.setState({
+            trackOn: true
+        });
         
         this.moving = setInterval(() =>{
             var x = this.state.posX + this.state.velocity * Math.sin(this.state.direction);
@@ -111,17 +125,38 @@ class PlayTrack extends Component {
 
     stopTracking = () => {
         this.setState({
-            // trackOn: false,
+            trackOn: false,
             posX: 800,
             posY: 450
         });
         clearInterval(this.moving);
         clearInterval(this.changeDirection);
     };
+
+    // handleKeyPressed = (e) => {
+    //     e.preventDefault();
+    //     // if (e.key === 'Enter') {
+    //     //     this.props.history.push('/Track');
+    //     // }
+    //     this.setState({
+    //         keyPressed: true
+    //     })
+    //     console.log(e);
+    // };
+    handleKeyPressed = (e) => {
+        if (e.keyCode === 27) {
+            this.setState({
+                keyPressed: true
+            });
+        };
+    };
+
     
     render() {
-
-        const { trackTime } = this.state;
+        // const TrackPage = () => {
+        //     return <Track props={this.props} />
+        // }
+        const { trackTime, keyPressed } = this.state;
         let trackCentiseconds = ("0" + (Math.floor(trackTime / 10) % 100)).slice(-2);
         let trackSeconds = ("0" + (Math.floor(trackTime / 1000) % 60)).slice(-2);
         // let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
@@ -133,14 +168,19 @@ class PlayTrack extends Component {
 
         return (
             <div className="outerContainer">
-                <div>
+                {/* <div> */}
                     {/* <button onClick={this.startTracking}>Start</button> */}
                     {/* <button onClick={this.stopTracking}>Stop</button> */}
 
                     {/* {this.state.timerOn === false && this.state.timerTime > 0 && (
                     // <button onClick={this.resetTimer}>Reset</button>
                 )} */}
-                </div>
+                    {/* {qPressed && (
+                        <Redirect to='/Track/' />
+                    )}
+                    <Route path="/Track/" component={Track} /> */}
+                    {/* <Route path='/Track' component={TrackPage} /> */}
+                {/* </div> */}
                 {/* <div>
                     {hours} : {minutes} : {seconds} : {centiseconds}
                 </div> */}
@@ -154,11 +194,14 @@ class PlayTrack extends Component {
                     <div
                     // onMouseEnter={this.state.trackStart && this.hoverOnHandler}
                     // onMouseLeave={this.state.trackStart && this.hoverOutHandler}
-                    onMouseEnter={this.hoverOnHandler}
-                    onMouseLeave={this.hoverOutHandler}
+                    onMouseEnter={this.state.trackOn && this.hoverOnHandler}
+                    onMouseLeave={this.state.trackOn && this.hoverOutHandler}
                     style={{padding: '0px', left, top, position: 'absolute'}}
                     >
                         <RedDot />
+                    {keyPressed && (
+                        <Redirect to={'/Track'} />
+                    )}
                     </div>
                 </div>
             </div>

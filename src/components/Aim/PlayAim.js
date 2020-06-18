@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import RedDot from '../RedDot/RedDot';
 
 import '../../App.css';
@@ -13,10 +14,19 @@ class PlayAim extends Component {
             timerTime: 30000,
             posX: 800,
             posY: 450,
-            success: 0
+            success: 0,
+            keyPressed: false
         };
+    };
+
+    componentDidMount() {
         this.startTimer();
-    }
+        document.addEventListener('keydown', this.handleKeyPressed);
+    };
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyPressed);
+    };
 
     startTimer = () => {
         this.setState({
@@ -86,16 +96,24 @@ class PlayAim extends Component {
             success: this.state.success + 1
         })
         // console.log(this.state.success);
-    }
+    };
+
+    handleKeyPressed = (e) => {
+        if (e.keyCode === 27) {
+            this.setState({
+                keyPressed: true
+            });
+        };
+    };
 
     render() {
         // const { timerTime, timerStart, timerOn } = this.state;
-        const { success } = this.state;
+        const { success, keyPressed, posX, posY } = this.state;
         // let seconds = ("0" + (Math.floor((timerTime / 1000) % 60) % 60)).slice(-2);
         // let minutes = ("0" + Math.floor((timerTime / 60000) % 60)).slice(-2);
         // let hours = ("0" + Math.floor((timerTime / 3600000) % 60)).slice(-2);
-        let left = this.state.posX + 'px';
-        let top = this.state.posY + 'px';
+        let left = posX + 'px';
+        let top = posY + 'px';
     
         return (
             <div className="outerContainer">
@@ -159,7 +177,11 @@ class PlayAim extends Component {
                     >
                         <RedDot />
                     </div>
+                    {keyPressed && (
+                        <Redirect to={'/Track'} />
+                    )}
                 </div>
+                
             </div>
         );
       }
