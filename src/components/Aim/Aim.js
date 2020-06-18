@@ -172,7 +172,7 @@ const Aim = () => {
             <div>
                 <div className="outerContainer">
                     <div className="container">
-                            <h1>Aim Training</h1>
+                            <h1>Aiming</h1>
                             <Link className="gameSetting" to='/Aim/PlayAim/'>
                                 <h2>Play</h2>
                             </Link>

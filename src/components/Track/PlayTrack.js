@@ -33,6 +33,10 @@ class PlayTrack extends Component {
     };
 
     componentWillUnmount() {
+        clearInterval(this.timer);
+        clearInterval(this.track);
+        clearInterval(this.moving);
+        clearInterval(this.changeDirection);
         document.removeEventListener('keydown', this.handleKeyPressed);
     };
 
@@ -194,8 +198,8 @@ class PlayTrack extends Component {
                     <div
                     // onMouseEnter={this.state.trackStart && this.hoverOnHandler}
                     // onMouseLeave={this.state.trackStart && this.hoverOutHandler}
-                    onMouseEnter={this.state.trackOn && this.hoverOnHandler}
-                    onMouseLeave={this.state.trackOn && this.hoverOutHandler}
+                    onMouseEnter={this.state.trackOn ? this.hoverOnHandler : null}
+                    onMouseLeave={this.state.trackOn ? this.hoverOutHandler : null}
                     style={{padding: '0px', left, top, position: 'absolute'}}
                     >
                         <RedDot />

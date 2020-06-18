@@ -25,6 +25,7 @@ class PlayAim extends Component {
     };
 
     componentWillUnmount() {
+        clearInterval(this.timer);
         document.removeEventListener('keydown', this.handleKeyPressed);
     };
 
@@ -172,14 +173,14 @@ class PlayAim extends Component {
 
                 <div className="container">
                     <div 
-                    onClick={this.state.timerOn && this.shootHandler}
+                    onClick={this.state.timerOn ? this.shootHandler : null}
                     style={{padding: '0px', left, top, position: 'absolute'}}
                     >
                         <RedDot />
                     </div>
-                    {keyPressed && (
-                        <Redirect to={'/Track'} />
-                    )}
+                    {keyPressed ? (
+                        <Redirect to={'/Aim'} />
+                    ) : null}
                 </div>
                 
             </div>

@@ -33,11 +33,11 @@ const App = () => {
                     <div className="container">
                         <h1>Aim Trainer</h1>
                             <Link className="gameSetting" to='/Track'>
-                                <h2>Track Training</h2>
+                                <h2>Tracking</h2>
                             </Link>
                 
                             <Link className="gameSetting" to='/Aim'>
-                                <h2>Aim Training</h2>
+                                <h2>Aiming</h2>
                             </Link>
                     </div>
                 </div>

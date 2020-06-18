@@ -141,7 +141,7 @@ const Track = () => {
             <div>
                 <div className="outerContainer">
                     <div className="container">
-                            <h1>Track Training</h1>
+                            <h1>Tracking</h1>
                             <Link className="gameSetting" to='/Track/PlayTrack/'>
                                 <h2>Play</h2>
                             </Link>
