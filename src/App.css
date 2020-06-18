@@ -10,16 +10,16 @@ h1{
 h2{
     justify-content: center;
     text-align: center;
+    color: lightblue;
+    font-size: 30px;
+    white-space: pre-wrap;
 }
 
 .gameSetting{
     background-color: #202b33;
-    text-align: center;
     border: solid 1px transparent;
     border-radius: 4px;
     padding: 10px 20px;
-    color: lightblue;
-    font-size: 20px;
     margin: auto;
     margin-top: 30px;
     width: 240px;
@@ -36,8 +36,8 @@ h2{
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 100vh;
-    background-color: #696969;   
+    /* height: ;
+    background-color: #696969;    */
 }
 
 .container{
