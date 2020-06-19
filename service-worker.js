@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Aim-Trainer/precache-manifest.bd1242f16602740b1fa0a14541f784e4.js"
+  "/Aim-Trainer/precache-manifest.17545223fcd52c5ae30be44236f2c76c.js"
 );
 
 self.addEventListener('message', (event) => {
