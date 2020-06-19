@@ -11,7 +11,7 @@ const Help = (props) => {
                     <h2>{props.text}</h2>
                     <h2>{"\nPress Esc key to quit the game."}</h2>
 
-                    <Link className="gameSetting" to={props.sourceName}>
+                    <Link className="gameSetting" to={'/'+props.sourceName}>
                         <h2>Return</h2>
                     </Link>
                 </div>

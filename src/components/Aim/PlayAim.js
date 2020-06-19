@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect, HashRouter, Route} from 'react-router-dom';
 import RedDot from '../RedDot/RedDot';
+import GameScore from '../GameScore/GameScore';
 
 import '../../App.css';
+
 
 
 class PlayAim extends Component {
@@ -15,7 +17,8 @@ class PlayAim extends Component {
             posX: 800,
             posY: 450,
             success: 0,
-            keyPressed: false
+            keyPressed: false,
+            gameOver: false
         };
     };
 
@@ -46,9 +49,11 @@ class PlayAim extends Component {
             this.setState({
                 timerOn: false,
                 posX: 800,
-                posY: 450
+                posY: 450,
+                gameOver: true
             });
-            alert('Success: ' + this.state.success);
+            // alert('Success: ' + this.state.success);
+            
           }
         }, 10);
       };
@@ -109,7 +114,7 @@ class PlayAim extends Component {
 
     render() {
         // const { timerTime, timerStart, timerOn } = this.state;
-        const { success, keyPressed, posX, posY } = this.state;
+        const { success, keyPressed, posX, posY, gameOver } = this.state;
         // let seconds = ("0" + (Math.floor((timerTime / 1000) % 60) % 60)).slice(-2);
         // let minutes = ("0" + Math.floor((timerTime / 60000) % 60)).slice(-2);
         // let hours = ("0" + Math.floor((timerTime / 3600000) % 60)).slice(-2);
@@ -117,73 +122,83 @@ class PlayAim extends Component {
         let top = posY + 'px';
     
         return (
-            <div className="outerContainer">
-
-                {/* <div className="Countdown"> */}
-                    {/* <div className="Countdown-display">
-                    <button onClick={() => this.adjustTimer("incHours")}>&#8679;</button>
-                    <button onClick={() => this.adjustTimer("incMinutes")}>
-                        &#8679;
-                    </button>
-                    <button onClick={() => this.adjustTimer("incSeconds")}>
-                        &#8679;
-                    </button> */}
-            
-                    {/* <div className="Countdown-time"> */}
-                        {/* {hours} : {minutes} : {seconds} */}
-                    {/* </div> */}
-            
-                    {/* <button onClick={() => this.adjustTimer("decHours")}>&#8681;</button>
-                    <button onClick={() => this.adjustTimer("decMinutes")}>
-                        &#8681;
-                    </button>
-                    <button onClick={() => this.adjustTimer("decSeconds")}>
-                        &#8681;
-                    </button>
-                    </div> */}
-            
-                    {/* {timerOn === false && (timerStart === 0 || timerTime === timerStart) && (
-                    <button className="Button-start" onClick={this.startTimer}>
-                        Start
-                    </button>
-                    )}
-                    {timerOn === true && timerTime >= 1000 && (
-                    <button className="Button-stop" onClick={this.stopTimer}>
-                        Stop
-                    </button>
-                    )}
-                    {timerOn === false &&
-                    (timerStart !== 0 && timerStart !== timerTime && timerTime !== 0) && (
-                        <button className="Button-start" onClick={this.startTimer}>
-                        Resume
+            <HashRouter basename='/'>
+                <div className="outerContainer">
+                    {/* <div className="Countdown"> */}
+                        {/* <div className="Countdown-display">
+                        <button onClick={() => this.adjustTimer("incHours")}>&#8679;</button>
+                        <button onClick={() => this.adjustTimer("incMinutes")}>
+                            &#8679;
                         </button>
-                    )}
-            
-                    {(timerOn === false || timerTime < 1000) &&
-                    (timerStart !== timerTime && timerStart > 0) && (
-                        <button className="Button-reset" onClick={this.resetTimer}>
-                        Reset
-                        </button>
-                    )}
-                </div> */}
-
-                <div>
-                    {success}
-                </div>
-
-                <div className="container">
-                    <div 
-                    onClick={this.state.timerOn ? this.shootHandler : null}
-                    style={{padding: '0px', left, top, position: 'absolute'}}
-                    >
-                        <RedDot />
-                    </div>
-                    {keyPressed ? (
-                        <Redirect to={'/Aim'} />
-                    ) : null}
-                </div>
+                        <button onClick={() => this.adjustTimer("incSeconds")}>
+                            &#8679;
+                        </button> */}
                 
-            </div>
+                        {/* <div className="Countdown-time"> */}
+                            {/* {hours} : {minutes} : {seconds} */}
+                        {/* </div> */}
+                
+                        {/* <button onClick={() => this.adjustTimer("decHours")}>&#8681;</button>
+                        <button onClick={() => this.adjustTimer("decMinutes")}>
+                            &#8681;
+                        </button>
+                        <button onClick={() => this.adjustTimer("decSeconds")}>
+                            &#8681;
+                        </button>
+                        </div> */}
+                
+                        {/* {timerOn === false && (timerStart === 0 || timerTime === timerStart) && (
+                        <button className="Button-start" onClick={this.startTimer}>
+                            Start
+                        </button>
+                        )}
+                        {timerOn === true && timerTime >= 1000 && (
+                        <button className="Button-stop" onClick={this.stopTimer}>
+                            Stop
+                        </button>
+                        )}
+                        {timerOn === false &&
+                        (timerStart !== 0 && timerStart !== timerTime && timerTime !== 0) && (
+                            <button className="Button-start" onClick={this.startTimer}>
+                            Resume
+                            </button>
+                        )}
+                
+                        {(timerOn === false || timerTime < 1000) &&
+                        (timerStart !== timerTime && timerStart > 0) && (
+                            <button className="Button-reset" onClick={this.resetTimer}>
+                            Reset
+                            </button>
+                        )}
+                    </div> */}
+                    {!gameOver && (
+                        <div>
+                            {success}
+                        </div>
+                    )}
+
+                    <div className="container">
+                        <div 
+                        onClick={this.state.timerOn ? this.shootHandler : null}
+                        style={{padding: '0px', left, top, position: 'absolute'}}
+                        >
+                            <RedDot />
+                        </div>
+                        {keyPressed ? (
+                            <Redirect to={'/Aim'} />
+                        ) : null}
+                        {gameOver && (
+                            <Redirect to={'/Aim/PlayAim/GameScore'} />
+                        )}
+                    </div>
+                </div>
+                <Route
+                    path="/Aim/PlayAim/GameScore"
+                    render={(props) => (
+                        <GameScore {...props} sourceName={'Aim'} gameScore={success} />
+                    )}
+                />
+            </HashRouter>
         );
       }
 }
