@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Redirect, Route, HashRouter } from 'react-router-dom';
 import RedDot from '../RedDot/RedDot';
 import GameScore from '../GameScore/GameScore';
-// import firebase from '../../firebase';
-// import GetRecords from '../GetRecords/GetRecords';
-// import Track from './Track';
 
 import '../../App.css';
 
@@ -12,29 +9,21 @@ class PlayTrack extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // timerOn: false,
             timerStart: 30000,
             timerTime: 30000,
             trackOn: false,
             trackStart: 0,
             trackTime: 0,
-            // trackStart: false,
             posX: 800,
             posY: 450,
             velocity: 5,
             direction: Math.PI / 2,
             keyPressed: false,
             gameOver: false
-            // records: GetRecords('Track')
         }
-        // console.log(this.state.records);
-        // console.log(props);
     };
 
     componentDidMount() {
-        // this.setState({
-        //     records: GetRecords('Track')
-        // });
         this.startTracking();
         this.startTimer();
         document.addEventListener('keydown', this.handleKeyPressed);
@@ -48,14 +37,8 @@ class PlayTrack extends Component {
         document.removeEventListener('keydown', this.handleKeyPressed);
     };
 
-    // addNewRecord = 
-
     startTimer = () => {
-        // const records = GetRecords('Track');
-        // console.log(records);
         this.setState({
-        //   timerOn: true,
-            // trackOn: true,
             timerTime: this.state.timerTime,
             timerStart: this.state.timerTime
         });
@@ -70,18 +53,12 @@ class PlayTrack extends Component {
                 clearInterval(this.timer);
                 clearInterval(this.track);
                 this.stopTracking();
-                // this.setState({ trackOn: false });
-                // let message = 'Success: ' + this.state.success.toString();
-                // alert('Time On Track: ' + this.state.trackTime);
             }
         }, 10);
       };
 
     hoverOnHandler = () => {
         this.setState({
-            // timerOn: true,
-            // timerTime: this.state.timerTime,
-            // timerStart: Date.now() - this.state.timerTime
             trackTime: this.state.trackTime,
             trackStart: Date.now() - this.state.trackTime
         });
@@ -94,20 +71,7 @@ class PlayTrack extends Component {
 
     };
 
-    hoverOutHandler = () => {
-        // this.setState({
-        //     timerOn: false
-        // });
-        // clearInterval(this.timer);
-        clearInterval(this.track);
-    };
-
-    // resetTimer = () => {
-    //     this.setState({
-    //       timerStart: 0,
-    //       timerTime: 0
-    //     });
-    // };
+    hoverOutHandler = () => clearInterval(this.track);
 
     startTracking = () => {
         this.setState({
@@ -151,16 +115,6 @@ class PlayTrack extends Component {
         clearInterval(this.changeDirection);
     };
 
-    // handleKeyPressed = (e) => {
-    //     e.preventDefault();
-    //     // if (e.key === 'Enter') {
-    //     //     this.props.history.push('/Track');
-    //     // }
-    //     this.setState({
-    //         keyPressed: true
-    //     })
-    //     console.log(e);
-    // };
     handleKeyPressed = (e) => {
         if (e.keyCode === 27) {
             this.setState({
@@ -171,16 +125,10 @@ class PlayTrack extends Component {
 
     
     render() {
-        // const TrackPage = () => {
-        //     return <Track props={this.props} />
-        // }
+
         const { trackTime, keyPressed, gameOver, trackOn } = this.state;
         let trackCentiseconds = ("0" + (Math.floor(trackTime / 10) % 100)).slice(-2);
         let trackSeconds = ("0" + (Math.floor(trackTime / 1000) % 60)).slice(-2);
-        // let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
-        // let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
-        // let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
-        // let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
         let left = this.state.posX + 'px';
         let top = this.state.posY + 'px';
 
@@ -188,22 +136,6 @@ class PlayTrack extends Component {
             <HashRouter basename='/'>
 
                 <div className="outerContainer">
-                    {/* <div> */}
-                        {/* <button onClick={this.startTracking}>Start</button> */}
-                        {/* <button onClick={this.stopTracking}>Stop</button> */}
-
-                        {/* {this.state.timerOn === false && this.state.timerTime > 0 && (
-                        // <button onClick={this.resetTimer}>Reset</button>
-                    )} */}
-                        {/* {qPressed && (
-                            <Redirect to='/Track/' />
-                        )}
-                        <Route path="/Track/" component={Track} /> */}
-                        {/* <Route path='/Track' component={TrackPage} /> */}
-                    {/* </div> */}
-                    {/* <div>
-                        {hours} : {minutes} : {seconds} : {centiseconds}
-                    </div> */}
                     {!gameOver && (
                         <div>
                             {trackSeconds} : {trackCentiseconds}
@@ -212,8 +144,6 @@ class PlayTrack extends Component {
 
                     <div className="container">
                         <div
-                        // onMouseEnter={this.state.trackStart && this.hoverOnHandler}
-                        // onMouseLeave={this.state.trackStart && this.hoverOutHandler}
                         onMouseEnter={trackOn ? this.hoverOnHandler : null}
                         onMouseLeave={trackOn ? this.hoverOutHandler : null}
                         style={{padding: '0px', left, top, position: 'absolute'}}
@@ -228,7 +158,6 @@ class PlayTrack extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <Route path="/Track/GameScore" component={GameScore} /> */}
                 <Route
                     path="/Track/PlayTrack/GameScore"
                     render={(props) => (

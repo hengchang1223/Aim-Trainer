@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { HashRouter, Link } from 'react-router-dom';
 import GetRecords from '../GetRecords/GetRecords';
 import firebase from '../../firebase';
