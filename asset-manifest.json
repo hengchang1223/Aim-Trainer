@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/Aim-Trainer/static/css/main.e0d12afb.chunk.css",
-    "main.js": "/Aim-Trainer/static/js/main.9903cbad.chunk.js",
-    "main.js.map": "/Aim-Trainer/static/js/main.9903cbad.chunk.js.map",
+    "main.js": "/Aim-Trainer/static/js/main.2ac966f0.chunk.js",
+    "main.js.map": "/Aim-Trainer/static/js/main.2ac966f0.chunk.js.map",
     "runtime-main.js": "/Aim-Trainer/static/js/runtime-main.b6fe0218.js",
     "runtime-main.js.map": "/Aim-Trainer/static/js/runtime-main.b6fe0218.js.map",
-    "static/js/2.4d0f7e44.chunk.js": "/Aim-Trainer/static/js/2.4d0f7e44.chunk.js",
-    "static/js/2.4d0f7e44.chunk.js.map": "/Aim-Trainer/static/js/2.4d0f7e44.chunk.js.map",
+    "static/js/2.5eb664b4.chunk.js": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js",
+    "static/js/2.5eb664b4.chunk.js.map": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js.map",
     "index.html": "/Aim-Trainer/index.html",
-    "precache-manifest.ccce48fb3aac52e149eaedb67a032565.js": "/Aim-Trainer/precache-manifest.ccce48fb3aac52e149eaedb67a032565.js",
+    "precache-manifest.89867b98695b01f6281e5086734cfb7e.js": "/Aim-Trainer/precache-manifest.89867b98695b01f6281e5086734cfb7e.js",
     "service-worker.js": "/Aim-Trainer/service-worker.js",
     "static/css/main.e0d12afb.chunk.css.map": "/Aim-Trainer/static/css/main.e0d12afb.chunk.css.map",
-    "static/js/2.4d0f7e44.chunk.js.LICENSE.txt": "/Aim-Trainer/static/js/2.4d0f7e44.chunk.js.LICENSE.txt",
+    "static/js/2.5eb664b4.chunk.js.LICENSE.txt": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js.LICENSE.txt",
     "static/media/red_dot.png": "/Aim-Trainer/static/media/red_dot.0773aac1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b6fe0218.js",
-    "static/js/2.4d0f7e44.chunk.js",
+    "static/js/2.5eb664b4.chunk.js",
     "static/css/main.e0d12afb.chunk.css",
-    "static/js/main.9903cbad.chunk.js"
+    "static/js/main.2ac966f0.chunk.js"
   ]
 }
