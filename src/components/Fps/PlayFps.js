@@ -1,83 +1,76 @@
 import React, { Component } from 'react';
-import { Redirect, Route, HashRouter } from 'react-router-dom';
+import { Redirect, HashRouter, Route} from 'react-router-dom';
 import RedDot from '../RedDot/RedDot';
 import GameScore from '../GameScore/GameScore';
 
 import '../../App.css';
 
-class PlayTrack extends Component {
-    constructor(props) {
-        super(props);
+
+
+class PlayFps
+ extends Component {
+    constructor() {
+        super();
         this.state = {
+            timerOn: false,
             timerStart: 30000,
             timerTime: 30000,
-            trackOn: false,
-            trackStart: 0,
-            trackTime: 0,
             posX: 800,
             posY: 450,
             velocity: 5,
             direction: Math.PI / 2,
+            success: 0,
+            onTarget: false,
             keyPressed: false,
             gameOver: false
-        }
+        };
     };
 
     componentDidMount() {
-        this.startTracking();
         this.startTimer();
+        this.startTracking();
         document.addEventListener('keydown', this.handleKeyPressed);
+        document.addEventListener('click', this.handleClicked);
     };
 
     componentWillUnmount() {
         clearInterval(this.timer);
-        clearInterval(this.track);
         clearInterval(this.moving);
         clearInterval(this.changeDirection);
         document.removeEventListener('keydown', this.handleKeyPressed);
+        document.removeEventListener('click', this.handleClicked);
     };
 
     startTimer = () => {
         this.setState({
-            timerTime: this.state.timerTime,
-            timerStart: this.state.timerTime
+          timerOn: true,
+          timerTime: this.state.timerTime,
+          timerStart: this.state.timerTime
         });
 
         this.timer = setInterval(() => {
-            const newTime = this.state.timerTime - 10;
-            if (newTime >= 0) {
-                this.setState({
-                    timerTime: newTime
-                });
-            } else {
-                clearInterval(this.timer);
-                clearInterval(this.track);
-                this.stopTracking();
-            }
-        }, 10);
-      };
-
-    hoverOnHandler = () => {
-        this.setState({
-            trackTime: this.state.trackTime,
-            trackStart: Date.now() - this.state.trackTime
-        });
-
-        this.track = setInterval(() => {
+          const newTime = this.state.timerTime - 10;
+          if (newTime >= 0) {
             this.setState({
-                trackTime: Date.now() - this.state.trackStart
+              timerTime: newTime
             });
+          } else {
+            clearInterval(this.timer);
+            clearInterval(this.moving);
+            clearInterval(this.changeDirection);
+            this.setState({
+                timerOn: false,
+                posX: 800,
+                posY: 450,
+                gameOver: true
+            });
+            // alert('Success: ' + this.state.success);
+            
+          }
         }, 10);
-
     };
 
-    hoverOutHandler = () => clearInterval(this.track);
-
     startTracking = () => {
-        this.setState({
-            trackOn: true
-        });
-        
         this.moving = setInterval(() =>{
             var x = this.state.posX + this.state.velocity * Math.sin(this.state.direction);
             var y = this.state.posY + this.state.velocity * Math.cos(this.state.direction);
@@ -95,7 +88,7 @@ class PlayTrack extends Component {
                     posY: y
                 });
             };
-        }, 20);
+        }, 33);
 
         this.changeDirection = setInterval(() =>{
             this.setState({
@@ -104,15 +97,17 @@ class PlayTrack extends Component {
         }, 2000);
     };
 
-    stopTracking = () => {
+    hoverOnHandler = () => this.setState({onTarget: true});
+
+    hoverOutHandler = () => this.setState({onTarget: false});
+
+    shootHandler = () => {
         this.setState({
-            trackOn: false,
-            gameOver: true,
-            posX: 800,
-            posY: 450
-        });
-        clearInterval(this.moving);
-        clearInterval(this.changeDirection);
+            posX: 30 + Math.random() * 1540,
+            posY: 30 + Math.random() * 840,
+            success: this.state.success + 1
+        })
+        // console.log(this.state.success);
     };
 
     handleKeyPressed = (e) => {
@@ -123,50 +118,52 @@ class PlayTrack extends Component {
         };
     };
 
-    
+    handleClicked = (e) => {
+        if (this.state.onTarget) {
+            this.shootHandler();
+        };
+    };
+
     render() {
-
-        const { trackTime, keyPressed, gameOver, trackOn } = this.state;
-        let trackCentiseconds = ("0" + (Math.floor(trackTime / 10) % 100)).slice(-2);
-        let trackSeconds = ("0" + (Math.floor(trackTime / 1000) % 60)).slice(-2);
-        let left = this.state.posX + 'px';
-        let top = this.state.posY + 'px';
-
+        const { success, keyPressed, timerOn, posX, posY, gameOver } = this.state;
+        let left = posX + 'px';
+        let top = posY + 'px';
+    
         return (
             <HashRouter basename='/'>
-
                 <div className="outerContainer">
                     {!gameOver && (
                         <div>
-                            {trackSeconds} : {trackCentiseconds}
+                            {success}
                         </div>
                     )}
 
                     <div className="container">
-                        <div
-                        onMouseEnter={trackOn ? this.hoverOnHandler : null}
-                        onMouseLeave={trackOn ? this.hoverOutHandler : null}
+                        <div 
+                        // onClick={timerOn ? this.shootHandler : null}
+                        onMouseEnter={timerOn ? this.hoverOnHandler : null}
+                        onMouseLeave={timerOn ? this.hoverOutHandler : null}
                         style={{padding: '0px', left, top, position: 'absolute'}}
                         >
-                            <RedDot size={40} />
-                        {keyPressed && (
-                            <Redirect to={'/Track'} />
-                        )}
-                        {gameOver && (
-                            <Redirect to={'/Track/PlayTrack/GameScore'} />
-                        )}
+                            <RedDot size={40}/>
                         </div>
+                        {keyPressed ? (
+                            <Redirect to={'/Fps'} />
+                        ) : null}
+                        {gameOver && (
+                            <Redirect to={'/Fps/PlayFps/GameScore'} />
+                        )}
                     </div>
                 </div>
                 <Route
-                    path="/Track/PlayTrack/GameScore"
+                    path="/Fps/PlayFps/GameScore"
                     render={(props) => (
-                        <GameScore {...props} sourceName={'Track'} gameScore={trackTime} />
+                        <GameScore {...props} sourceName={'Fps'} gameScore={success} />
                     )}
                 />
             </HashRouter>
-        )
-    }
+        );
+      }
 }
 
-export default PlayTrack;
+export default PlayFps;
