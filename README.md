@@ -34,3 +34,9 @@ FPS simulation!
 Here is a demo:
 
 ![fps_demo](src/assets/fps_demo.gif)
+
+
+### TODO:
+
+1. FPS mode has a little lag, maybe there is a better way to fix that.
+2. Make the UI nicer
