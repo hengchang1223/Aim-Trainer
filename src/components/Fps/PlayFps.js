@@ -119,7 +119,7 @@ class PlayFps
     };
 
     handleClicked = (e) => {
-        if (this.state.onTarget) {
+        if (this.state.onTarget && this.state.timerOn) {
             this.shootHandler();
         };
     };
