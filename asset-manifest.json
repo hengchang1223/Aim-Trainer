@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Aim-Trainer/static/css/main.e0d12afb.chunk.css",
-    "main.js": "/Aim-Trainer/static/js/main.2ac966f0.chunk.js",
-    "main.js.map": "/Aim-Trainer/static/js/main.2ac966f0.chunk.js.map",
+    "main.js": "/Aim-Trainer/static/js/main.7bb8ed9b.chunk.js",
+    "main.js.map": "/Aim-Trainer/static/js/main.7bb8ed9b.chunk.js.map",
     "runtime-main.js": "/Aim-Trainer/static/js/runtime-main.b6fe0218.js",
     "runtime-main.js.map": "/Aim-Trainer/static/js/runtime-main.b6fe0218.js.map",
     "static/js/2.5eb664b4.chunk.js": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js",
     "static/js/2.5eb664b4.chunk.js.map": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js.map",
     "index.html": "/Aim-Trainer/index.html",
-    "precache-manifest.89867b98695b01f6281e5086734cfb7e.js": "/Aim-Trainer/precache-manifest.89867b98695b01f6281e5086734cfb7e.js",
+    "precache-manifest.ed43ec7fe023057860e2ef5aece8ff20.js": "/Aim-Trainer/precache-manifest.ed43ec7fe023057860e2ef5aece8ff20.js",
     "service-worker.js": "/Aim-Trainer/service-worker.js",
     "static/css/main.e0d12afb.chunk.css.map": "/Aim-Trainer/static/css/main.e0d12afb.chunk.css.map",
     "static/js/2.5eb664b4.chunk.js.LICENSE.txt": "/Aim-Trainer/static/js/2.5eb664b4.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.b6fe0218.js",
     "static/js/2.5eb664b4.chunk.js",
     "static/css/main.e0d12afb.chunk.css",
-    "static/js/main.2ac966f0.chunk.js"
+    "static/js/main.7bb8ed9b.chunk.js"
   ]
 }
