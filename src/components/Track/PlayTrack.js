@@ -6,12 +6,22 @@ import GameScore from '../GameScore/GameScore';
 import '../../App.css';
 
 class PlayTrack extends Component {
+    /*
+    timerTime: 30000ms == 30s Countdown
+    trackOn: game is going on or not
+    trackStart: help to calculate trackTime
+    trackTime: time your mouse pointer successfully keeping track of the target
+    posX, posY: (X, Y) position of target
+    velocity: moving speed of target
+    direction: moving direction of target
+    keyPressed: esc key press detection
+    gameOver: trigger Redirect to another page
+    */
     constructor(props) {
         super(props);
         this.state = {
-            timerStart: 30000,
             timerTime: 30000,
-            trackOn: false,
+            trackOn: true,
             trackStart: 0,
             trackTime: 0,
             posX: 800,
@@ -24,12 +34,14 @@ class PlayTrack extends Component {
     };
 
     componentDidMount() {
+        // Start Countdown, Tracking, moving, changing direction, and esc key detector
         this.startTracking();
         this.startTimer();
         document.addEventListener('keydown', this.handleKeyPressed);
     };
 
     componentWillUnmount() {
+        // Clear all function started when mounted
         clearInterval(this.timer);
         clearInterval(this.track);
         clearInterval(this.moving);
@@ -38,11 +50,7 @@ class PlayTrack extends Component {
     };
 
     startTimer = () => {
-        this.setState({
-            timerTime: this.state.timerTime,
-            timerStart: this.state.timerTime
-        });
-
+        // Countdown function, update time each 10ms
         this.timer = setInterval(() => {
             const newTime = this.state.timerTime - 10;
             if (newTime >= 0) {
@@ -58,6 +66,7 @@ class PlayTrack extends Component {
       };
 
     hoverOnHandler = () => {
+        // Calculate track time
         this.setState({
             trackTime: this.state.trackTime,
             trackStart: Date.now() - this.state.trackTime
@@ -73,11 +82,8 @@ class PlayTrack extends Component {
 
     hoverOutHandler = () => clearInterval(this.track);
 
-    startTracking = () => {
-        this.setState({
-            trackOn: true
-        });
-        
+    startTracking = () => {        
+        // update target position each 20ms
         this.moving = setInterval(() =>{
             var x = this.state.posX + this.state.velocity * Math.sin(this.state.direction);
             var y = this.state.posY + this.state.velocity * Math.cos(this.state.direction);
@@ -97,6 +103,7 @@ class PlayTrack extends Component {
             };
         }, 20);
 
+        // change direction each 2000ms (2s)
         this.changeDirection = setInterval(() =>{
             this.setState({
                 direction: Math.random() * Math.PI * 2
@@ -105,6 +112,7 @@ class PlayTrack extends Component {
     };
 
     stopTracking = () => {
+        // stop moving and changing direction after time is up or game is quitted
         this.setState({
             trackOn: false,
             gameOver: true,
@@ -116,6 +124,7 @@ class PlayTrack extends Component {
     };
 
     handleKeyPressed = (e) => {
+        // update keyPressed status after esc is pressed
         if (e.keyCode === 27) {
             this.setState({
                 keyPressed: true

@@ -9,15 +9,25 @@ import '../../App.css';
 
 class PlayFps
  extends Component {
+     /*
+     timerOn: indicate game is going on or not
+     timerTime: 30000ms == 30s countdown
+     posX, posY: (X, Y) position of target
+     velocity: moving speed of target
+     direction: moving direction of target
+     success: how many targets have been successfully aimed
+     onTarget: indicate the mouse pointer on the target or not
+     keyPressed: detect esc key pressed or not
+     gameOver: trigger Redirect to another page
+     */
     constructor() {
         super();
         this.state = {
-            timerOn: false,
-            timerStart: 30000,
+            timerOn: true,
             timerTime: 30000,
             posX: 800,
             posY: 450,
-            velocity: 5,
+            velocity: 2,
             direction: Math.PI / 2,
             success: 0,
             onTarget: false,
@@ -27,6 +37,7 @@ class PlayFps
     };
 
     componentDidMount() {
+        // Starting Countdown, Moving target, Changing target direction, detecting ESC key pressed and mouse clicked or not
         this.startTimer();
         this.startTracking();
         document.addEventListener('keydown', this.handleKeyPressed);
@@ -34,6 +45,7 @@ class PlayFps
     };
 
     componentWillUnmount() {
+        // Clear all event listeners and setInterval functions after unmounting the component
         clearInterval(this.timer);
         clearInterval(this.moving);
         clearInterval(this.changeDirection);
@@ -42,12 +54,7 @@ class PlayFps
     };
 
     startTimer = () => {
-        this.setState({
-          timerOn: true,
-          timerTime: this.state.timerTime,
-          timerStart: this.state.timerTime
-        });
-
+        // set up setInterval function and update time each 10ms
         this.timer = setInterval(() => {
           const newTime = this.state.timerTime - 10;
           if (newTime >= 0) {
@@ -63,14 +70,13 @@ class PlayFps
                 posX: 800,
                 posY: 450,
                 gameOver: true
-            });
-            // alert('Success: ' + this.state.success);
-            
+            });            
           }
         }, 10);
     };
 
     startTracking = () => {
+        // move target each 20ms
         this.moving = setInterval(() =>{
             var x = this.state.posX + this.state.velocity * Math.sin(this.state.direction);
             var y = this.state.posY + this.state.velocity * Math.cos(this.state.direction);
@@ -88,8 +94,9 @@ class PlayFps
                     posY: y
                 });
             };
-        }, 33);
+        }, 20);
 
+        // change direction of target each 2000ms (2s)
         this.changeDirection = setInterval(() =>{
             this.setState({
                 direction: Math.random() * Math.PI * 2
@@ -102,15 +109,16 @@ class PlayFps
     hoverOutHandler = () => this.setState({onTarget: false});
 
     shootHandler = () => {
+        // change target to random position after been successfully aimed
         this.setState({
             posX: 30 + Math.random() * 1540,
             posY: 30 + Math.random() * 840,
             success: this.state.success + 1
         })
-        // console.log(this.state.success);
     };
 
     handleKeyPressed = (e) => {
+        // esc key press detection
         if (e.keyCode === 27) {
             this.setState({
                 keyPressed: true
@@ -119,6 +127,7 @@ class PlayFps
     };
 
     handleClicked = (e) => {
+        // only when the mouse pointer is on the target and the game is going on, the click will affect
         if (this.state.onTarget && this.state.timerOn) {
             this.shootHandler();
         };
@@ -140,7 +149,6 @@ class PlayFps
 
                     <div className="container">
                         <div 
-                        // onClick={timerOn ? this.shootHandler : null}
                         onMouseEnter={timerOn ? this.hoverOnHandler : null}
                         onMouseLeave={timerOn ? this.hoverOutHandler : null}
                         style={{padding: '0px', left, top, position: 'absolute'}}

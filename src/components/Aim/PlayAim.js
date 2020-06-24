@@ -5,14 +5,19 @@ import GameScore from '../GameScore/GameScore';
 
 import '../../App.css';
 
-
-
 class PlayAim extends Component {
+    /*
+    timerOn: the countdown is going on
+    timerTime: 30000ms which is 30s count down
+    posX, posY: (X, Y) position of target
+    success: how many targets are successfully aimed
+    keyPressed: decide whether esc key pressed or not
+    gameOver: trigger Redirect to another page
+    */
     constructor() {
         super();
         this.state = {
             timerOn: true,
-            timerStart: 30000,
             timerTime: 30000,
             posX: 800,
             posY: 450,
@@ -24,20 +29,18 @@ class PlayAim extends Component {
 
     componentDidMount() {
         this.startTimer();
+        // detect esc key pressed or not
         document.addEventListener('keydown', this.handleKeyPressed);
     };
 
     componentWillUnmount() {
         clearInterval(this.timer);
+        // remove event listener when unmounting the component
         document.removeEventListener('keydown', this.handleKeyPressed);
     };
 
     startTimer = () => {
-        this.setState({
-          timerOn: true,
-          timerTime: this.state.timerTime,
-          timerStart: this.state.timerTime
-        });
+        // setup setInterval function to update time as countdown going on
         this.timer = setInterval(() => {
           const newTime = this.state.timerTime - 10;
           if (newTime >= 0) {
@@ -45,29 +48,29 @@ class PlayAim extends Component {
               timerTime: newTime
             });
           } else {
+            // when countdown is over, stop the setInterval function and set all the settings to gameover status
             clearInterval(this.timer);
             this.setState({
                 timerOn: false,
                 posX: 800,
                 posY: 450,
                 gameOver: true
-            });
-            // alert('Success: ' + this.state.success);
-            
+            });            
           }
         }, 10);
       };
 
     shootHandler = () => {
+        // update position after user successfully aimed a target
         this.setState({
             posX: 10 + Math.random() * 1580,
             posY: 10 + Math.random() * 880,
             success: this.state.success + 1
         })
-        // console.log(this.state.success);
     };
 
     handleKeyPressed = (e) => {
+        // set keyPressed to true after detecting esc pressed
         if (e.keyCode === 27) {
             this.setState({
                 keyPressed: true

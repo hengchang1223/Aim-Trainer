@@ -4,20 +4,19 @@ import GetRecords from '../GetRecords/GetRecords';
 import firebase from '../../firebase';
 import '../../App.css';
 
-// class GameScore extends Component {
-//     constructor(props) {
-//         super(props);
-        
-//     }
-// }
-const GameScore = (props) => {
 
+const GameScore = (props) => {
+    /*
+    name: to be filled in with user name
+    submitted: if submitted, remove the submit panel
+    */
     const [name, setName] = useState('');
     const [submitted, setSubmited] = useState(false);
     const records = GetRecords(props.sourceName);
 
     const onSubmit = e => {
         e.preventDefault();
+        // connect to firebase cloud storage
         if (name !== '') {
             firebase
                 .firestore()
